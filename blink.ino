@@ -5,15 +5,15 @@ void setup() {
 }
 void dot(){
   digitalWrite(LED_BUILTIN, HIGH);
-  delay(200);
+  delay(300);
   digitalWrite(LED_BUILTIN, LOW);
-  delay(900);
+  delay(1000);
 }
 void dash(){
   digitalWrite(LED_BUILTIN, HIGH);
   delay(600);
   digitalWrite(LED_BUILTIN, LOW);
-  delay(900);
+  delay(1000);
   
 }
 void loop() {
@@ -67,6 +67,6 @@ void loop() {
   dot();
   dash();
   dot();
-  delay(20000);
+  delay(10000);
 
 }
