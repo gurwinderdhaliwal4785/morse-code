@@ -1,72 +1,105 @@
+// Morse Code Display using LED and Button
+
+// Pin assignments
+int led1 = LED_BUILTIN;   // LED connected to the built-in LED pin
+int buttonPin = 2;        // Push button for resetting the name
+bool isButtonPressed = false; // Flag to indicate if the button is pressed
+
 void setup() {
-  // put your setup code here, to run once:
-  pinMode(LED_BUILTIN,OUTPUT);
+  pinMode(led1, OUTPUT);   // Set LED pin as an output
+  pinMode(buttonPin, INPUT_PULLUP); // Set button pin as an input with pull-up resistor
+  attachInterrupt(digitalPinToInterrupt(buttonPin), resetName, FALLING); // Attach interrupt to button pin
+}
 
-}
-void dot(){
-  digitalWrite(LED_BUILTIN, HIGH);
-  delay(300);
-  digitalWrite(LED_BUILTIN, LOW);
-  delay(1000);
-}
-void dash(){
-  digitalWrite(LED_BUILTIN, HIGH);
-  delay(600);
-  digitalWrite(LED_BUILTIN, LOW);
-  delay(1000);
-  
-}
 void loop() {
-  // put your main code here, to run repeatedly:
-  //My name: GURWINDER
-  //Morse Code: --. ..- .-. .-- .. -. -.. . .-.
+  if (isButtonPressed) {
+    resetName();          // Call resetName function if the button is pressed
+    isButtonPressed = false; // Reset the button press flag
+  }
 
-  //led blink for 'G'
-  dash();
-  dash();
-  dot();
-  delay(1500);
+  // Display "Gurwinder" in Morse code
+// G: --.
+// U: ..-
+// R: .-.
+// W: .--
+// I: ..
+// N: -.
+// D: -..
+// E: .
+// R: .-.
 
-  //led blink for 'U'
-  dot();
-  dot();
-  dash();
-  delay(1500);
 
-  //led blink for 'R'
-  dot();
-  dash();
-  dot();
-  delay(1500);
-
-  //led blink for 'W'
-  dot();
-  dash();
-  dash();
-  delay(1500);
-
-  //led blink for 'I'
-  dot();
-  dot();
-  delay(1500);
-   //led blink for 'N'
-
-  dash();
-  dot();
-  delay(1500);
-   //led blink for 'D'
+  // G (--.)
  
-  dash();
-  dot();
-  dot();
-  delay(1500);
-   //led blink for 'E'
-  dot();
-  delay(1500);
-   //led blink for 'R'
-  dot();
-  dash();
-  dot();
-  delay(10000);
+  blinkDash(); delay(500);
+  blinkDash(); delay(500);
+  blinkDot(); delay(1000);
+ 
 
+  // U(..-)
+  blinkDot(); delay(500);
+  blinkDot(); delay(500);
+  blinkDash(); delay(1000);
+
+  // R (.-.)
+  blinkDot(); delay(500);
+  blinkDash(); delay(500);
+  blinkDot(); delay(1000);
+
+  // W (.--)
+  blinkDot(); delay(500);
+  blinkDash(); delay(500);
+  blinkDash(); delay(1000);
+
+  // I (..)
+  blinkDot(); delay(500);
+  blinkDot(); delay(1000);
+
+  // N (-.)
+  blinkDash();  delay(500);
+  blinkDot();delay(1000);
+
+  // D (-..)
+  blinkDash(); delay(500);
+  blinkDot(); delay(500);
+  blinkDot(); delay(1000);
+
+  // E (.)
+  blinkDot(); delay(1000);
+
+  // R (.-.)
+  blinkDot(); delay(500);
+  blinkDash(); delay(500);
+  blinkDot(); delay(1000);
+
+
+
+  // t (-)
+  blinkDash(); delay(1000);
+
+  delay(2000);  // Gap between words
+}
+// Function to blink a dot
+void blinkDot() {
+  digitalWrite(led1, HIGH);
+  delay(200);
+  digitalWrite(led1, LOW);
+  delay(200);
+}
+// Function to blink a dash
+void blinkDash() {
+  digitalWrite(led1, HIGH);
+  delay(600);
+  digitalWrite(led1, LOW);
+  delay(200);
+}
+
+void resetName() {
+  // Reset the name display here
+  digitalWrite(led1, LOW);
+  delay(1000);
+  digitalWrite(led1, HIGH);
+  delay(1000);
+  digitalWrite(led1, LOW);
+  delay(1000);
 }
